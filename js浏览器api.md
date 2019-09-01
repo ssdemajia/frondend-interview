@@ -1,3 +1,18 @@
+###img使用Base64
+
+src包括`Content-type`、`Content-encoding`。格式为`data:[Content-type];[Charset];base64,<data>`
+
+```html
+<div>
+  <p>Taken from wikpedia</p>
+  <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+        9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+</div>
+```
+
+
+
 ### for和forEach哪个快
 
 环境是chrome版本75.0.3770.100
@@ -34,7 +49,7 @@ for (let i = 0; i < arr.length; i++) {
 
 1. 最好的方法，可以在void()里面放函数，比如window.form.submit()，`<a href="javascript:void(0)" onclick="test()">test</a>`
 
-2. 因为#是锚点，点击后会跳到顶部，`<a href="#" onclick="test2()">test2</a>`
+2. 或者使用锚点，但是锚点，点击后会跳到顶部，`<a href="#" onclick="test2()">test2</a>`
 
 ## BOM
 ```javascript

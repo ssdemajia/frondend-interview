@@ -1,7 +1,6 @@
-
-# CSS
-
 ## CSS基础
+
+CSS语法不区分大小写
 
 ### display: none和visibility:hidden
 
@@ -9,23 +8,7 @@ display:none表示这个tag不会出现在页面上（但是可以使用dom交�
 
 visibility:hidden表示这个tag不可见，但是空间会给他分配。
 
-### a标签伪类排序
 
-`:link -> :visited -> :hover -> :active`
-
-link是未访问状态，因此它是第一个，即它可以变为visited、hover、active状态。
-
-visited是访问过的状态，它不能再变为未访问，但是可以hover和active切换样式。
-
-hover是移动到a标签上时激活，它可以通过点击变为active状态。
-
-active是鼠标选定时的样式，它不能再变为其他状态。
-
-### IE盒模型与标准盒模型
-
-标准盒模型中一个块级元素的height和width只能设置content区域，此时这个元素在页面的大小等于content的height加padding加border，这也是box-sizing这个属性的box-sizing: content-box;
-
-box-sizing还有一个属性是border-box，设置后border和padding会被包含进height中一起计算。那么内容content的高宽就要剪去border和padding。老的IE也就是这个border-box的模型。
 
 ### Position、Display、Float
 
@@ -80,6 +63,18 @@ html {
 ### 堆叠上下文（层叠上下文）z-index
 
 层叠a上下文是html元素的三维空间，div的渲染顺序受到z-index的影响
+
+### 盒模型
+
+每个html标签都是一个小方块
+
+W3C标准盒模型中属性width、height只包含内容content，不包含border、padding。
+
+IE盒模型中属性width、height包括内容content、边框border、内边距padding。
+
+可以使用box-sizing设置：`box-sizing:border-box;`就是IE盒模型，` box-sizing: content-box;`是W3C标准盒模型。
+
+将margin计算后，得到的是标签所占居的大小。
 
 ## CSS实现元素水平居中
 
@@ -149,9 +144,9 @@ CSS 函数 `scale()` 用于修改元素的大小。可以通过向量形式定�
 
 弹性布局两个轴线：主轴和交叉轴。
 
-![](/Users/shaoshuai/OneDrive/notes/frontend/flex axis.png)
+![](./images/flex axis.png)
 
-![](/Users/shaoshuai/OneDrive/notes/frontend/flex cross axis.png)
+![](./images/flex cross axis.png)
 
 flex根据轴来对齐元素。
 
@@ -192,8 +187,9 @@ flex宽度计算： https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexibl
 `flex: 1 1 0;`这个设置会忽略`flex-basis`不将其计算进去，那么每个元素的宽度就会相等。
 
 ## CSS 布局
+
 ### 实现盒内元素居中
-使用felx的align-items对主轴进行对齐，justify-content对交叉轴进行对齐。
+使用flex的align-items对主轴进行对齐，justify-content对交叉轴进行对齐。
 ```css
 .container {
     height: 400px;
@@ -211,3 +207,103 @@ flex宽度计算： https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexibl
   <div class="item">I am centered!</div>
 </div>    
 ```
+
+## 选择器
+
+### **组合选择器**
+
+- 多元素选择器
+  E,F 多元素选择器，用,分隔，同时匹配元素E或元素F。
+- 后代选择器
+  E F 后代选择器，用空格分隔，匹配E元素所有的后代（不只是子元素、子元素向下递归）元素F
+- 子元素选择器
+  E>F 子元素选择器，用>分隔，匹配E元素的所有直接子元素
+- 直接相邻选择器
+  E+F 直接相邻选择器，匹配E元素之后的相邻的同级元素F
+- 普通相邻选择器
+  E~F 普通相邻选择器（弟弟选择器），匹配E元素之后的所有同级元素F（无论直接相邻与否）
+
+### **属性选择器**
+
+属性可以是自己定义的属性比如
+
+```html
+<div test="true">
+  name
+</div>
+<style>
+  div[test*="true"] {
+    color: red;
+  }
+</style>
+```
+
+- E[attr]：筛选出所有具有属性名为attr的属性的元素
+- E[attr=value]：筛选出所有属性attr的值为vlaue的元素
+- E[attr ~= value] 匹配所有属性attr具有多个空格分隔、其中一个值等于value的元素
+- E[attr ^= value] 匹配属性attr的值以value开头的元素
+- E[attr $= value] 匹配属性attr的值以value结尾的元素
+- E[attr *= value] 匹配属性attr的值包含value的元素
+
+### **伪类选择器**
+
+- E:root 匹配文档的根元素，对于HTML文档，就是HTML元素
+- E:nth-child(n) 匹配其父元素的第n个子元素，第一个编号为1
+- E:link 匹配所有未被点击的链接
+- E:visited 匹配所有已被点击的链接
+- E:active 匹配鼠标已经其上按下、还没有释放的E元素
+- E:hover 匹配鼠标悬停其上的E元素
+- E:first-child 匹配作为长子（**第一个**子女）的元素E
+- E:lang(c) 匹配lang属性等于c的E元素
+- E:enabled 匹配表单中可用的元素
+- E:disabled 匹配表单中禁用的元素
+- E:checked 匹配表单中被选中的radio或checkbox元素
+- E::selection 匹配用户当前选中的元素
+- E:nth-last-child(n) 匹配其父元素的倒数第n个子元素，第一个编号为1
+- E:nth-of-type(n) 与:nth-child()作用类似，但是仅匹配使用同种标签的元素
+- E:nth-last-of-type(n) 与:nth-last-child() 作用类似，但是仅匹配使用同种标签的元素
+- E:last-child 匹配父元素的最后一个子元素，等同于:nth-last-child(1)
+- E:first-of-type 匹配当前元素的父元素下使用同种标签的第一个子元素，等同于:nth-of-type(1)
+- E:last-of-type 匹配父元素下使用同种标签的最后一个子元素，等同于:nth-last-of-type(1)
+- E:only-child 匹配父元素下仅有的一个子元素，等同于:first-child:last-child或 :nth-child(1):nth-last-child(1)
+- E:only-of-type 匹配父元素下使用同种标签的唯一一个子元素，等同于:first-of-type:last-of-type或 :nth-of-type(1):nth-last-of-type(1)
+- E:empty 匹配一个不包含任何子元素的元素，文本节点也被看作子元素
+- E:not(selector) 匹配不符合当前选择器的任何元素
+
+###**伪元素选择器**
+
+- E::first-line 匹配E元素内容的第一行
+- E::first-letter 匹配E元素内容的第一个字母
+- E::before 在E元素之前插入生成的内容
+- E::after 在E元素之后插入生成的内容
+
+### 优先级
+
+优先级:从高到低
+
+- 在属性后面使用 !important 会覆盖页面内任何位置定义的元素样式
+- 作为style属性写在元素标签上的内联样式
+- id选择器
+- 类选择器
+- 伪类选择器
+- 属性选择器
+- 标签选择器
+- 通配符选择器
+- 浏览器自定义
+
+### a标签伪类排序
+
+`:link -> :visited -> :hover -> :active`，LVHA
+
+1. link是**未访问状态**，因此它是第一个，即它可以变为visited、hover、active状态。
+
+2. visited是**访问过的状态**，它不能再变为未访问，但是可以hover和active切换样式。
+
+3. hover是**鼠标移动到a标签上时状态**，它可以通过点击变为active状态。
+
+4. active是**鼠标选定时状态**，它不能再变为其他状态。
+
+当鼠标放在标签上时，link、visited、hover的优先级相同，如果要实现**鼠标放在标签上变色**，需要将hover放在最后面。
+
+当鼠标点击标签时，link、visited、hover、active优先级相同，如果需要实现**鼠标点击后标签变色**，需要将active放在最后。
+
