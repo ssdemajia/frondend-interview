@@ -13,5 +13,5 @@
 - [javascript网络请求](https://github.com/ssdemajia/frondend-interview/blob/master/js%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82.md)
 - [Promise](https://github.com/ssdemajia/frondend-interview/blob/master/promise.md)
 - [懒加载、预加载](https://github.com/ssdemajia/frondend-interview/blob/master/js%E6%87%92%E5%8A%A0%E8%BD%BD%E3%80%81%E9%A2%84%E5%8A%A0%E8%BD%BD.md)
-- [浏览器API]()
-
+- [浏览器API](https://github.com/ssdemajia/frondend-interview/blob/master/js%E6%B5%8F%E8%A7%88%E5%99%A8api.md)
+- [Vue](https://github.com/ssdemajia/frondend-interview/blob/master/vue.md)
