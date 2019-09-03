@@ -1,5 +1,4 @@
-
-## 二维数组
+## 二维数组生成
 
 `let dp = Array.from({length: len1+1}, item => Array(len2+1).fill(0));`
 
@@ -135,3 +134,4 @@ function throttle(fn, wait, leading = false, trailing = false) {
 ```
 
 最后一次触发使用的是setTimeout来对剩余时间进行计时，当节流3s时，那么开始会设置一个定时器setTimeout来保证最后一次会在3s后触发，如果trailing为false，那么使用的是方法1的按照时间戳的方法。
+

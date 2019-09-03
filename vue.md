@@ -4,7 +4,7 @@
 
 Virtual dom是Vue使用Object对象模拟DOM节点，再使用特殊的render方法将其渲染成真实的DOM节点.
 
-![vueDiff](vueDiff.png)
+![vueDiff](./images/vueDiff.png)
 
 diff算法只会在同层级比较，比较后出现四种情况：
 
@@ -15,7 +15,7 @@ diff算法只会在同层级比较，比较后出现四种情况：
 
 ## 生命周期函数
 
-vue的生命周期函数 ![Vue.js Component Lifecycle Diagram](vue-lifecycle.png)
+vue的生命周期函数 ![Vue.js Component Lifecycle Diagram](./images/vue-lifecycle.png)
 
 生命周期钩子函数：
 
@@ -66,3 +66,26 @@ watch: {
 2. computed对属性getter执行后会进行缓存，因此计算依赖多个值时，computed更方便；
 
 3. watch在监听的值发生变化时会执行回调函数，因此如果需要新旧值对比或者需要对值变化时执行其他函数，watch更加适合。
+
+## Vuex
+
+vuex是集中式的状态管理工具。多层嵌套的视图之间传参很麻烦，因此使用**全局单例模式**来管理状态。
+
+### vuex与全局变量的区别
+
+1. vuex的状态是响应式的，当组件从vuex中获取数据，那么当vuex状态发生变化时，相应的子组件也随之得到更新。
+2. 状态的改变必须使用commit提交，方便跟踪每一个变化。
+
+### Vue SSR（服务端渲染）
+
+**为什么要使用服务端渲染？**
+
+1. 更好的SEO，搜索引擎爬虫可以直接查看完整渲染的页面。
+2. 更快内容到达，减少首屏加载时间。
+
+**限制：**
+
+1. dom相关代码只能在某些生命周期hook中使用。
+2. 涉及Nodejs运行环境。
+3. 更多cpu负载，因为需要在nodejs中渲染页面。
+

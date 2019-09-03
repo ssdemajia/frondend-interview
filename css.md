@@ -2,13 +2,31 @@
 
 CSS语法不区分大小写
 
-### display: none和visibility:hidden
+### css中引入样式
 
-display:none表示这个tag不会出现在页面上（但是可以使用dom交互），在页面上没有它的空间。
+**内联法：**直接在元素style属性中写样式，`<div style="color: red"></div>`，结构html和样式css混在一起，不好维护。
 
-visibility:hidden表示这个tag不可见，但是空间会给他分配。
+嵌入法：使用`<style></style>`标签书写样式。
 
+链接法：使用`@import url(css/ss.css)`来引入外部样式。@import规则必须先于其他规则，在@import后面可以接媒体查询，`@import url(css/ss.css) screen and print;`,当解析到import时，会等页面全部下载后才下载。
 
+导入法：使用`<link rel="stylesheet" type="text/css" href="ss.css">`	,多个link标签会同时下载。
+
+### 文档流（流式布局）
+
+文档流中的元素，内联元素按照行内（内联方向）显示，块级元素则一个接一个的显示。
+
+### display: none、visibility:hidden、opacity:0、v-if、v-show
+
+**display:none**：表示这个tag不会出现在页面上（但是可以使用dom交互），在页面上没有它的空间。
+
+**visibility:hidden**：表示这个tag不可见，但是空间会给他分配，不能使用dom交互，比如点击事件。
+
+**opacity:0**：表示这个tag不可见，但是分配空间，同时可以使用dom。
+
+**v-if**：如果里面的值是false，那么这个元素不会出现在dom树上，在切换中事件监听和子组件被摧毁和重建。
+
+**v-show**：使用css来切换显示与不显示，相对v-if而言，因为元素还是要被加载到dom上，所以有更大的初始渲染成本。
 
 ### Position、Display、Float
 
@@ -16,31 +34,31 @@ visibility:hidden表示这个tag不可见，但是空间会给他分配。
 
 Position是一个元素在页面中相对于其他元素是怎么定位的，共有5种：
 
-static：默认的。
+**static：**默认的。
 
-relative：有left、right、top、bottom等属性，不会脱离原先的文档流。
+**relative：**有left、right、top、bottom等属性，不会脱离原先的文档流，相对于父元素进行定位，原来的位置大小会随着自己盒模型的大小变化。
 
-absolute：和relative类似，相对于第一个非static父元素进行定位，原来的位置会被人取代。
+**absolute：**和relative类似，相对于第一个非static父元素进行定位，原来的位置会被人取代。默认情况下，height、width设置为auto的元素，他们尽管原来是div，但是他们的高宽会按照内容进行调整。top和buttom同时被指定时，top优先。
 
-fixed：相对于window进行定位。
+**fixed：**相对于window进行定位，不为元素预留空间，相对于viewport来指定元素位置，随着页面滚动但不改变位置，同时会创建新的堆叠上下文。
 
-sticky：一开始是relative定位，然后在滑动到边缘后就固定了。
+**sticky：**一开始是relative定位，然后在滑动到边缘后就固定了。
 
 
 
 Display是一个元素被创建出来后是一个盒子，然后应该怎么显示在页面上。
 
-block：元素开始于一个新行，占据整行宽度`<div>, <p>, <h1>-<h6>, <ul>, <li>, & <canvas>`。
+**block：**元素开始于一个新行，占据整行宽度`<div>, <p>, <h1>-<h6>, <ul>, <li>, & <canvas>`。
 
-Inline：元素可以从任意行的位置开始，height、width不再有用。`<span>, <input>, <button>, <img>`
+**Inline：**元素可以从任意行的位置开始，height、width不再有用。`<span>, <input>, <button>, <img>`，inline元素可以使用margin-left、margin-right、padding，但是不能使用margin-top、margin-bottom。
 
-grid：元素表现为块级元素，内部使用grid layout。
+**grid：**元素表现为块级元素，内部使用grid layout。
 
-flex：元素表现为块级元素，内部使用flex layout。
+**flex：**元素表现为块级元素，内部使用flex layout。
 
-inline-block：元素表现为inline元素，但是有height、width。
+**inline-block：**元素表现为inline元素，但是有height、width。
 
-none：移除这个元素。
+**none：**移除这个元素。
 
 
 
@@ -66,15 +84,15 @@ html {
 
 ### 盒模型
 
-每个html标签都是一个小方块
+每个html标签都是一个小方块：
 
-W3C标准盒模型中属性width、height只包含内容content，不包含border、padding。
+1. W3C标准盒模型中属性width、height只包含内容content，不包含border、padding。
 
-IE盒模型中属性width、height包括内容content、边框border、内边距padding。
+2. IE盒模型中属性width、height包括内容content、边框border、内边距padding。
 
 可以使用box-sizing设置：`box-sizing:border-box;`就是IE盒模型，` box-sizing: content-box;`是W3C标准盒模型。
 
-将margin计算后，得到的是标签所占居的大小。
+将margin计算后，得到的是标签在页面上所占居的空间大小。
 
 ## CSS实现元素水平居中
 
@@ -102,7 +120,7 @@ float CSS属性指定一个元素应沿其容器的左侧或右侧放置，允�
 
 ### 清除浮动
 
-当应用于非浮动块时，它将非浮动块的[边框边界](https://developer.mozilla.org/en-US/docs/CSS/box_model)移动到所有相关浮动元素[外边界](https://developer.mozilla.org/en-US/docs/CSS/box_model)的下方。这个非浮动块的[垂直外边距](https://developer.mozilla.org/en-US/docs/CSS/margin_collapsing)会折叠。
+当应用于非浮动块时，它将非浮动块的边框撑大到所有相关浮动元素下边界。这个非浮动块的[垂直外边距](https://developer.mozilla.org/en-US/docs/CSS/margin_collapsing)会折叠。
 
 **如果一个元素里只有浮动元素，那它的高度会是0。**如果你想要它自适应即包含所有浮动元素，那你需要清除它的子元素。一种方法叫做**clearfix**，即`clear`一个不浮动的 [`::after`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::after) [伪元素](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements)。
 
@@ -162,7 +180,7 @@ flex容器默认属性：
 针对容器：
 
 1. 使用`justify-content:space-between`将子元素之间主轴空间均匀分配。
-2. `align-items:stretch`，默认值，会在交叉轴方向拉伸子元素的高度，`align: flex-start`会将子元素按flex容器顶部对其。
+2. `align-items:stretch`，默认值，会在交叉轴方向拉伸子元素的高度，`align-items: flex-start`会将子元素按flex容器顶部对齐。
 3. `flex-direction: column;`，默认是row，按照列（行）的方向排列。
 4. `flex-wrap:wrap;`子元素宽度超过父元素宽度时会换行，如果flex容器有高度限制，那么子元素的高度也会被压缩。
 5. 可以用`flex-flow`来替换`flex-direction flex-wrap`.
@@ -258,7 +276,7 @@ flex宽度计算： https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexibl
 - E:enabled 匹配表单中可用的元素
 - E:disabled 匹配表单中禁用的元素
 - E:checked 匹配表单中被选中的radio或checkbox元素
-- E::selection 匹配用户当前选中的元素
+- E:selection 匹配用户当前选中的元素
 - E:nth-last-child(n) 匹配其父元素的倒数第n个子元素，第一个编号为1
 - E:nth-of-type(n) 与:nth-child()作用类似，但是仅匹配使用同种标签的元素
 - E:nth-last-of-type(n) 与:nth-last-child() 作用类似，但是仅匹配使用同种标签的元素

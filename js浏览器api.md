@@ -1,4 +1,4 @@
-###img使用Base64
+### img使用Base64
 
 src包括`Content-type`、`Content-encoding`。格式为`data:[Content-type];[Charset];base64,<data>`
 
@@ -174,7 +174,7 @@ label标签需要一个for属性和input的id属性相同，这样他们就能�
 
 ### localStorage与sessionStorage
 
-localStorage储存的数据能够跨浏览器保留，而sessionStorage当页面结束时会被清除(页面会话在浏览器打开期间一直保持打开，重新加载或者恢复页面仍会保持原来的会话，在新标签或者打开一个新页面会初始化一个新的会话)。
+localStorage储存的数据能够跨浏览器保留（各大浏览器默认最大5M），而sessionStorage当页面结束时会被清除(页面会话在浏览器打开期间一直保持打开，重新加载或者恢复页面仍会保持原来的会话，在新标签或者打开一个新页面会初始化一个新的会话)。
 
 localStorage中键值对总是以**字符串的形式储存**（值会被转换为字符串）。
 
@@ -203,11 +203,11 @@ sessionStorage主要用于会话期间的独立存储区域。
 
 ### cookie
 
-当服务器收到HTTP请求时，服务器可以在响应头里面添加一个`Set-Cookie`选项。浏览器收到响应后通常会保存下Cookie，之后对该服务器每一次请求中都通过Cookie请求头部将Cookie信息发送给服务器.
+当服务器收到HTTP请求时，服务器可以在响应头里面添加一个`Set-Cookie`选项。浏览器收到响应后通常会保存下Cookie，之后**对该服务器每一次请求中都通过Cookie请求头部将Cookie信息发送给服务器（大小限制4K）。**
 
 会话期Cookie不需要设置expires（过期时间）。
 
-Cookie安全：标记为 `Secure` 的Cookie只应通过被HTTPS协议加密过的请求发送给服务端，通过JavaScript的 `Document.cookie`API无法访问带有 `HttpOnly` 标记的Cookie，它们只应该发送给服务端。
+**Cookie安全**：标记为 `Secure` 的Cookie只应通过被HTTPS协议加密过的请求发送给服务端，通过JavaScript的 `Document.cookie`API无法访问带有 `HttpOnly` 标记的Cookie，它们只应该发送给服务端。
 
 ### 匿名函数缺点
 
