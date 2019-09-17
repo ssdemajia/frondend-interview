@@ -1,3 +1,25 @@
+### babel
+
+`Babel`是一个javascript的转译器：他能够解析、转换、输出代码。Babel分为两部分：babel-core和babel-polyfill。babel-core负责解析、输出代码。babel-polyfill负责转换。
+
+Babel针对常用环境编写了preset（预设）。使用TC39的提案：
+
+[TC39](https://github.com/tc39) 将提案分为以下几个阶段：
+
+- Stage 0 - 设想（Strawman）：只是一个想法，可能有 Babel插件。
+- Stage 1- 建议（Proposal）：这是值得跟进的。
+- Stage 2 - 草案（Draft）：初始规范。
+- Stage 3- 候选（Candidate）：完成规范并在浏览器上初步实现。
+- Stage 4 - 完成（Finished）：将添加到下一个年度版本发布中。
+
+### babel-runtime和babel-polyfill的区别
+
+参考：https://juejin.im/post/5a96859a6fb9a063523e2591
+
+**babel-polyfill：**在运行环境中一些没有实现的句法时，babel会做兼容，但是会有缺点：会污染全局变量，同时整个依赖包（这个依赖包增加了没有实现的句法）也被加载进去。因此babel-polyfill适用于编写app的情况。
+
+**babel-runtime：**当使用没有实现的句法时，babel-runtime会重写句法，避免全局污染。
+
 ### 箭头函数
 
 与普通函数的区别，主要是：
